@@ -13,29 +13,40 @@
                 </form>
             </div>
         </li>
-        <li class="dropdown notification-list topbar-dropdown" style="padding-top: 17px;">
-            {{--            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"--}}
-            {{--               aria-haspopup="false" aria-expanded="false">--}}
-            {{--                <img src="{{asset('assets/images/flags/us.jpg')}}" alt="user-image" class="me-0 me-sm-1" height="12">--}}
-            {{--                <span class="align-middle d-none d-sm-inline-block">English</span> <i--}}
-            {{--                    class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>--}}
-            {{--            </a>--}}
-            {{--            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu">--}}
+        <li class="dropdown notification-list topbar-dropdown" >
+                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <img src="{{asset('assets/images/flags/language.png')}}" alt="user-image" class="uil uil-arrow-growth" height="25">
+                            <span class="align-middle d-none d-sm-inline-block">
+                                @if(LaravelLocalization::getCurrentLocale() == 'ar')
+                                    العربية
+                                @else
+                                English
+                                @endif
+                            </span> <i
+                                class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu">
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <!-- item-->
+                            <a hreflang="{{ $localeCode }}"
+                               href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                               class="dropdown-item notify-item">
+                                {{ $properties['native'] }}
+                            </a>
+                            @endforeach
+                        </div>
 
-            {{--                <!-- item-->--}}
-            {{--                <a href="javascript:void(0);" class="dropdown-item notify-item">--}}
-            {{--                    <img src="{{asset('assets/images/flags/arabia.png')}}" alt="user-image" class="me-1" height="12"> <span--}}
-            {{--                        class="align-middle">Arabic</span>--}}
-            {{--                </a>--}}
-
-            {{--            </div>--}}
-
-            <select class="form-select changeLang">
-                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-
-                <option value="ar" {{ session()->get('locale') == 'ar' ? 'selected' : '' }}>Arabic</option>
-
-            </select>
+{{--            <ul>--}}
+{{--                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
+{{--                    <li>--}}
+{{--                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"--}}
+{{--                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
+{{--                            {{ $properties['native'] }}--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
         </li>
 
         <li class="dropdown notification-list">
@@ -80,18 +91,18 @@
                                 </form>
                                 </p>
                             @else
-{{--                                <p class="notify-details">--}}
-{{--                                    Username:--}}
-{{--                                    [{{ $notification->data['title'] }}]--}}
-{{--                                    has been registered.--}}
-{{--                                    <small class="text-muted">at [{{ $notification->created_at }}]</small>--}}
-{{--                                    <br>--}}
-{{--                                <form action="{{ route('notifications.update', $notification) }}" method="POST">--}}
-{{--                                    @csrf--}}
-{{--                                    @method('PUT')--}}
-{{--                                    <input type="submit" class="btn btn-sm btn-info" value="Mark as read">--}}
-{{--                                </form>--}}
-{{--                                </p>--}}
+                                {{--                                <p class="notify-details">--}}
+                                {{--                                    Username:--}}
+                                {{--                                    [{{ $notification->data['title'] }}]--}}
+                                {{--                                    has been registered.--}}
+                                {{--                                    <small class="text-muted">at [{{ $notification->created_at }}]</small>--}}
+                                {{--                                    <br>--}}
+                                {{--                                <form action="{{ route('notifications.update', $notification) }}" method="POST">--}}
+                                {{--                                    @csrf--}}
+                                {{--                                    @method('PUT')--}}
+                                {{--                                    <input type="submit" class="btn btn-sm btn-info" value="Mark as read">--}}
+                                {{--                                </form>--}}
+                                {{--                                </p>--}}
                             @endif
                         </a>
                     @empty

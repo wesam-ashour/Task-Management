@@ -10,14 +10,22 @@ use App\Models\Client;
 class SearchPagination extends Component
 {
     use WithPagination;
+
     public $searchTerm;
+
     public function render()
     {
         $searchTerm = '%' . $this->searchTerm . '%';
         $user = Auth::user();
 
-        return view('livewire.search-pagination',[
-            'employees' => Client::where('company','like', $searchTerm)->orWhere('vat', 'like', $searchTerm)->orWhere('address', 'like', $searchTerm)->paginate(10)
-        ],compact('user'));
+        return view('livewire.search-pagination', [
+            'employees' => Client::where('company->en', 'like', $searchTerm)
+                ->orWhere('vat->en', 'like', $searchTerm)
+                ->orWhere('address->en', 'like', $searchTerm)
+                ->orWhere('company->ar', 'like', $searchTerm)
+                ->orWhere('vat->ar', 'like', $searchTerm)
+                ->orWhere('address->ar', 'like', $searchTerm)
+                ->paginate(10)
+        ], compact('user'));
     }
 }

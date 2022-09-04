@@ -31,8 +31,13 @@ class ClientsController extends Controller
 
     public function store(CreateClientRequest $request)
     {
-        $clients = Client::create($request->validated());
-
+//        $clients = Client::create($request->validated());
+        $validate = $request->validated();
+        $Client = new Client();
+        $Client->company = ['en' => $request->company_en, 'ar' => $request->company_ar];
+        $Client->vat = ['en' => $request->vat_en, 'ar' => $request->vat_ar];
+        $Client->address = ['en' => $request->address_en, 'ar' => $request->address_ar];
+        $Client->save();
         return redirect()->route('clients.index');
     }
 
@@ -58,8 +63,14 @@ class ClientsController extends Controller
 
     public function update(EditClientRequest $request, Client $client)
     {
-        $client->update($request->validated());
-
+//        $client->update($request->validated());
+        $validate = $request->validated();
+        $Client = Client::findOrFail($client->id);
+        $Client->update([
+            $Client->company = ['en' => $request->company_en, 'ar' => $request->company_ar],
+            $Client->vat = ['en' => $request->vat_en, 'ar' => $request->vat_ar],
+            $Client->address = ['en' => $request->address_en, 'ar' => $request->address_ar],
+        ]);
         return redirect()->route('clients.index')->with('success-edit', 'The client updated successfully');
 
     }

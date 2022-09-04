@@ -33,20 +33,26 @@ class TasksController extends Controller
             $data = Task::with('user')->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
+                ->addColumn('title', function (Task $task) {
+                    return $task->title;
+                })
                 ->addColumn('AssignedTo', function (Task $task) {
                     return $task->user->name;
                 })
                 ->addColumn('Client', function (Task $task) {
                     return $task->client->company;
                 })
+                ->addColumn('status', function (Task $task) {
+                    return trans('sentence.' . $task->status);
+                })
                 ->addColumn('action', function (Task $task) {
                     $actionBtn = '
-                    <a class="btn btn-sm btn-info" href="' . route('tasks.show', $task->id) . '">Show</a>
-                    <a href="' . route('tasks.edit', $task) . '" class="btn btn-sm btn-primary">Edit</a>
+                    <a class="btn btn-sm btn-info" href="' . route('tasks.show', $task->id) . '"> ' . trans('sentence.Show') . ' </a>
+                    <a href="' . route('tasks.edit', $task) . '" class="btn btn-sm btn-primary"> ' . trans('sentence.Edit') . ' </a>
                     <form action="' . route('tasks.destroy', $task->id) . '" onsubmit=" return confirmDelete();" method="POST" style="display: inline-block;">
                        <input type="hidden" name="_method" value="DELETE">
                        <input type="hidden" name="_token" value="' . csrf_token() . '">
-                       <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                       <input type="submit" class="btn btn-sm btn-danger" value=" ' . trans('sentence.Delete') . ' ">
                     </form>
                     ';
                     return $actionBtn;
@@ -61,8 +67,19 @@ class TasksController extends Controller
 
     public function store(CreateTaskRequest $request)
     {
-        $task = Task::create($request->validated());
-        $user = User::find($request->user_id);
+//        $task = Task::create($request->validated());
+//        $user = User::find($request->user_id);
+
+        $validate = $request->validated();
+        $Task = new Task();
+        $Task->title = ['en' => $request->title_en, 'ar' => $request->title_ar];
+        $Task->description = ['en' => $request->description_en, 'ar' => $request->description_ar];
+        $Task->deadline = $request->deadline;
+        $Task->status = $request->status;
+        $Task->user_id = $request->user_id;
+        $Task->client_id = $request->client_id;
+        $Task->project_id = $request->project_id;
+        $Task->save();
 
         return redirect()->route('tasks.index')->with('success-create', 'The task added successfully');
 
@@ -117,7 +134,18 @@ class TasksController extends Controller
     public function update(EditTaskRequest $request, Task $task)
     {
         $user = Auth::user()->get('email');
-        $task->update($request->validated());
+//        $task->update($request->validated());
+
+        $validate = $request->validated();
+        $Task = Task::findOrFail($task->id);
+        $Task->update([
+            $Task->title = ['en' => $request->title_en, 'ar' => $request->title_ar],
+            $Task->description = ['en' => $request->description_en, 'ar' => $request->description_ar],
+            $Task->deadline = $request->deadline,
+            $Task->status = $request->status,
+            $Task->user_id = $request->user_id,
+            $Task->client_id = $request->client_id,
+            $Task->project_id = $request->project_id]);
 
         $input = $request->all('status', 'title');
         Notification::send($user, new TasksNotification($input));

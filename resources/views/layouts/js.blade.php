@@ -75,16 +75,35 @@
                     orderable: true,
                     searchable: true
                 },
-            ]
+            ],
+            "language":
+                {
+                    "sProcessing": "{{ __('sentence.sProcessing') }}",
+                    "sLengthMenu": "{{ __('sentence.sLengthMenu') }}",
+                    "sZeroRecords": "{{ __('sentence.sZeroRecords') }}",
+                    "sInfo": "{{ __('sentence.sInfo') }}",
+                    "sInfoEmpty": "{{ __('sentence.sInfoEmpty') }}",
+                    "sInfoFiltered": "{{ __('sentence.sInfoFiltered') }}",
+                    "sInfoPostFix": "",
+                    "sSearch": "{{ __('sentence.sSearch') }}",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "{{ __('sentence.sFirst') }}",
+                        "sPrevious": "{{ __('sentence.sPrevious') }}",
+                        "sNext": "{{ __('sentence.sNext') }}",
+                        "sLast": "{{ __('sentence.sLast') }}"
+                    }
+                }
         });
 
     });
 </script>
+
 <script>
 
 
     function confirmDelete() {
-        return confirm('Are you sure you want to delete?');
+        return confirm('{{ __('sentence.delete_confirm') }}');
     }
 
 </script>

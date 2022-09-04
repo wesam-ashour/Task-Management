@@ -28,9 +28,9 @@
                 @include('sweetalert::alert')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Table Tasks</h4>
+                        <h4 class="header-title">{{trans('sentence.List_Tasks')}}</h4>
                         <div class="content-header">
-                            <a href="{{ route(('tasks.create')) }}" class="btn btn-success">Add new task</a>
+                            <a href="{{ route(('tasks.create')) }}" class="btn btn-success">{{trans('sentence.Add_new_task')}}</a>
                         </div>
                         <br>
                         <div class="tab-content">
@@ -40,13 +40,13 @@
                                         <table class="table table-bordered" id="yajra-datatable">
                                             <thead class="table-dark">
                                             <tr>
-                                                <th>No</th>
-                                                <th>Title</th>
-                                                <th>Assigned to</th>
-                                                <th>Client</th>
-                                                <th>deadline</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>{{ __('sentence.No') }}</th>
+                                                <th>{{ __('sentence.Title') }}</th>
+                                                <th>{{ __('sentence.Assigned to') }}</th>
+                                                <th>{{ __('sentence.Client') }}</th>
+                                                <th>{{ __('sentence.deadline') }}</th>
+                                                <th>{{ __('sentence.Status') }}</th>
+                                                <th>{{ __('sentence.Actions') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody>

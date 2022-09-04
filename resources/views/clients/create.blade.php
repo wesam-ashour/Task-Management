@@ -11,58 +11,110 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Create new client</h4>
+                                <h4 class="header-title">{{ __('sentence.Add_new_client') }}</h4>
                                 <br>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="input-sizes-preview">
                                         <form action="{{ route('clients.store') }}" method="POST">
-                                            @csrf
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Company
-                                                    Name</label>
-                                                <input type="text" name="company"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('company')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    @csrf
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal" class="form-label">
+                                                            {{ __('sentence.Name_Client') }}
+                                                        </label><span
+                                                            style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="company_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('company_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Vat</label>
-                                                <input type="text" name="vat"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('vat')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Vat_Client') }}</label>
+                                                        <span style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="vat_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('vat_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Address</label>
-                                                <input type="text" name="address"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('address')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Address_Client') }}</label><span
+                                                            style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="address_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('address_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <!-- /.card-body -->
-                                            <div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                                                </div> <!-- end col -->
+
+                                                <div class="col-lg-6">
+
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal" class="form-label">
+                                                            {{ __('sentence.Name_Client') }}
+                                                        </label><span
+                                                            style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="company_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('company_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Vat_Client') }}</label>
+                                                        <span style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="vat_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('vat_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Address_Client') }}</label><span
+                                                            style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="address_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name">
+                                                        @error('address_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                </div> <!-- end col -->
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{ __('sentence.submit') }}</button>
+                                                </div>
                                             </div>
                                         </form>
-                                    </div> <!-- end preview-->
-
-                                </div> <!-- end tab-content-->
-
-                            </div> <!-- end card-body -->
-                        </div> <!-- end card -->
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
+                                    </div>
+                                </div> <!-- end preview-->
+                            </div> <!-- end tab-content-->
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card -->
+                </div> <!-- end col -->
             </div>
+            <!-- end row -->
         </div>
+    </div>
     </div>
 @endsection

@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'login');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified','localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],'prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/dashboard', [Controller::class, 'index'])->name('dashboard');
     Route::get('lang/change', [Controller::class, 'change'])->name('changeLang');
 

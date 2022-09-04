@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class Project extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes,HasTranslations;
+    public $translatable = ['title','description'];
+
     protected $fillable = [
         'title',
         'description',
@@ -18,7 +21,7 @@ class Project extends Model
         'status'
     ];
 
-    public const STATUS = ['open', 'in progress', 'blocked', 'cancelled', 'completed'];
+    public const STATUS  = ['open', 'in_progress', 'blocked', 'cancelled', 'completed'];
 
     public function user()
     {

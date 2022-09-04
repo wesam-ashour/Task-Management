@@ -10,56 +10,104 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Edit client info</h4>
+                                <h4 class="header-title">{{ __('sentence.Editـclientـinfo') }}</h4>
                                 <br>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="input-sizes-preview">
                                         <form action="{{ route('clients.update',$client->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Company
-                                                    Name</label>
-                                                <input type="text" name="company"
-                                                       value="{{ $client->company ? : old('company') }}"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('name')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal" class="form-label">
+                                                            {{ __('sentence.Name_Client') }}
+                                                        </label><span
+                                                            style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="company_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('company','en') }}">
+                                                        @error('company_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Vat</label>
-                                                <input type="text" name="vat" value="{{ $client->vat ? : old('vat') }}"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('name')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Vat_Client') }}</label>
+                                                        <span style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="vat_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('vat','en') }}">
+                                                        @error('vat_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Address</label>
-                                                <input type="text" name="address"
-                                                       value="{{ $client->address ? : old('address') }}"
-                                                       id="example-input-normal" class="form-control"
-                                                       placeholder="Name">
-                                                @error('name')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Address_Client') }}</label><span
+                                                            style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <input type="text" name="address_en"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('address','en')}}">
+                                                        @error('address_en')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
 
-                                            <br>
-                                            <!-- /.card-body -->
-                                            <div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                                                </div> <!-- end col -->
+
+                                                <div class="col-lg-6">
+
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal" class="form-label">
+                                                            {{ __('sentence.Name_Client') }}
+                                                        </label><span
+                                                            style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="company_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('company','ar')}}">
+                                                        @error('company_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Vat_Client') }}</label>
+                                                        <span style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="vat_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('vat','ar')}}">
+                                                        @error('vat_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal"
+                                                               class="form-label">{{ __('sentence.Address_Client') }}</label><span
+                                                            style="color: red"> ({{ __('sentence.arabic') }})</span>
+                                                        <input type="text" name="address_ar"
+                                                               id="example-input-normal" class="form-control"
+                                                               placeholder="Name" value="{{ $client->getTranslation('address','ar') }}">
+                                                        @error('address_ar')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                </div> <!-- end col -->
+                                                <div>
+                                                    <button type="submit"
+                                                            class="btn btn-primary">{{ __('sentence.submit') }}</button>
+                                                </div>
                                             </div>
                                         </form>
                                     </div> <!-- end preview-->
-
                                 </div> <!-- end tab-content-->
-
                             </div> <!-- end card-body -->
                         </div> <!-- end card -->
                     </div> <!-- end col -->

@@ -61,9 +61,10 @@
                 @include('sweetalert::alert')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Table Roles</h4>
+                        <h4 class="header-title"> {{ __('sentence.List_Projects') }}</h4>
                         <div class="content-header">
-                            <a href="{{ route(('projects.create')) }}" class="btn btn-primary">Add new project</a>
+                            <a href="{{ route(('projects.create')) }}"
+                               class="btn btn-primary">{{ __('sentence.Add_new_project') }}</a>
                         </div>
                         <br>
                         <div class="tab-content">
@@ -71,52 +72,63 @@
                                 <div class="table-responsive-sm">
                                     <div class="app-search dropdown d-none d-lg-block">
                                         <form>
-                                            <label for="example-select" class="form-label">Search</label>
+                                            <label for="example-select"
+                                                   class="form-label">{{ __('sentence.Search') }}</label>
                                             <div class="input-group">
 
                                                 <input type="text" class="form-control dropdown-toggle"
                                                        placeholder="Search..." id="myInput">
                                                 <span class="mdi mdi-magnify search-icon"></span>
-                                                <button class="input-group-text btn-primary" type="submit">Search
+                                                <button class="input-group-text btn-primary"
+                                                        type="submit">{{ __('sentence.Search') }}
                                                 </button>
                                             </div>
                                             <br>
                                             <div>
-                                                <label for="example-select" class="form-label">Search With Date</label>
+                                                <label for="example-select"
+                                                       class="form-label">{{ __('sentence.Search_With_Date') }}</label>
                                                 <form action="{{url('search')}}" method="POST">
                                                     @csrf
                                                     <div>
-                                                        From <input type="date" class="form-control" id="from"
-                                                                    name="from">
-                                                        To <input type="date" class="form-control" id="to" name="to">
+                                                        {{ __('sentence.From') }} <input type="date"
+                                                                                         class="form-control" id="from"
+                                                                                         name="from">
+                                                        {{ __('sentence.To') }} <input type="date" class="form-control"
+                                                                                       id="to" name="to">
                                                     </div>
                                                     <br>
                                                     <button class="btn btn-sm btn-success" type="submit" name="search"
-                                                            title="search">Search
+                                                            title="search">{{ __('sentence.Search') }}
                                                     </button>
                                                 </form>
                                             </div>
                                             <br>
                                         </form>
                                         <table id="table_format" class="table table-centered mb-0">
-                                            <label for="example-select" class="form-label">Filter Select</label>
+                                            <label for="example-select"
+                                                   class="form-label">{{ __('sentence.Filter_Select') }}</label>
                                             <select id="filterText" class="form-select" onchange="filterText()">
-                                                <option selected value="0">No value</option>
-                                                <option value="open">open</option>
-                                                <option value="in progress">in progress</option>
-                                                <option value="blocked">blocked</option>
-                                                <option value="cancelled">cancelled</option>
-                                                <option value="completed">completed</option>
+                                                <option selected value="0">{{ __('sentence.No_value') }}</option>
+                                                <option
+                                                    value="{{ __('sentence.open') }}">{{ __('sentence.open') }}</option>
+                                                <option
+                                                    value="{{ __('sentence.in_progress') }}">{{ __('sentence.in_progress') }}</option>
+                                                <option
+                                                    value="{{ __('sentence.blocked') }}">{{ __('sentence.blocked') }}</option>
+                                                <option
+                                                    value="{{ __('sentence.cancelled') }}">{{ __('sentence.cancelled') }}</option>
+                                                <option
+                                                    value="{{ __('sentence.completed') }}">{{ __('sentence.completed') }}</option>
                                             </select>
                                             <br>
                                             <thead class="table-dark">
                                             <tr>
-                                                <th>title</th>
-                                                <th>description</th>
-                                                <th>deadline</th>
-                                                <th>status
+                                                <th>{{ __('sentence.Title') }}</th>
+                                                <th>{{ __('sentence.Description') }}</th>
+                                                <th>{{ __('sentence.deadline') }}</th>
+                                                <th>{{ __('sentence.Status') }}
                                                 </th>
-                                                <th>action</th>
+                                                <th>{{ __('sentence.Actions') }}</th>
                                             </tr>
                                             </thead>
                                             <tbody id="myTable">
@@ -126,35 +138,35 @@
                                                     <td>{{ $project->title }}</td>
                                                     <td>{{ $project->description }}</td>
                                                     <td>{{ $project->deadline }}</td>
-                                                    <td>{{ $project->status }}</td>
+                                                    <td>{{trans('sentence.'.$project->status)}}</td>
                                                     <td>
                                                         @if($user->id == '1')
                                                             @can('project-edit')
                                                                 <a href="{{ route('projects.edit',$project->id) }}"
                                                                    class="btn btn-sm btn-info">
-                                                                    Edit
+                                                                    {{ __('sentence.Edit') }}
                                                                 </a>
                                                             @endcan
                                                             @can('project-delete')
                                                                 <form
                                                                     action="{{ route('projects.destroy', $project->id) }}"
                                                                     method="POST"
-                                                                    onsubmit="return confirm('Are your sure?');"
+                                                                    onsubmit=" return confirmDelete();"
                                                                     style="display: inline-block;">
                                                                     <input type="hidden" name="_method" value="DELETE">
                                                                     <input type="hidden" name="_token"
                                                                            value="{{ csrf_token() }}">
                                                                     <input type="submit" class="btn btn-sm btn-danger"
-                                                                           value="Delete">
+                                                                           value="{{ __('sentence.Delete') }}">
                                                                 </form>
                                                             @endcan
                                                         @else
-                                                            No actions for this account
+                                                            {{ __('sentence.No_actions_for_this_account') }}
                                                         @endif
                                                     </td>
                                                 </tr>
                                             @empty
-                                                No Projects Found
+                                                {{ __('sentence.No_Projects_Found') }}
                                             @endforelse
                                             </tbody>
                                         </table>

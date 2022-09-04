@@ -34,8 +34,8 @@ class UsersController extends Controller
             }
 
         } else {
-            $data = User::whereHas("roles", function($q){ $q->where("name", "user"); })->orderBy('id', 'asc')->paginate(5);
-            $trash = User::onlyTrashed()->get();
+            $data = User::whereHas("roles", function($q){ $q->where("name", "user"); })->orderBy('id', 'asc')->paginate(3, ['*'], 'users');
+            $trash = User::onlyTrashed()->paginate(3, ['*'], 'trashed');
         }
         return view('users.index', compact('data', 'trash', 'notifications', 'user'));
 

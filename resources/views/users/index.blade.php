@@ -28,9 +28,9 @@
                 @include('sweetalert::alert')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Table Users</h4>
+                        <h4 class="header-title">{{ __('sentence.TableـUsers') }}</h4>
                         <div class="content-header">
-                            <a href="{{ route(('users.create')) }}" class="btn btn-primary">Add new user</a>
+                            <a href="{{ route(('users.create')) }}" class="btn btn-primary">{{ __('sentence.Addـnewـuser') }}</a>
                         </div>
                         <br>
                         <div class="tab-content">
@@ -50,13 +50,13 @@
 
                                                 class="form-control"
 
-                                                placeholder="Search..."
+                                                placeholder="{{ __('sentence.Search') }}"
 
                                                 aria-label="Search"
 
                                                 aria-describedby="button-addon2">
 
-                                            <button class="btn btn-success" type="submit" id="button-addon2">Search
+                                            <button class="btn btn-success" type="submit" id="button-addon2">{{ __('sentence.Search') }}
                                             </button>
 
                                         </div>
@@ -65,10 +65,10 @@
                                     <table class="table table-centered mb-0">
                                         <thead class="table-dark">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Roles</th>
-                                            <th>Actions</th>
+                                            <th>{{ __('sentence.Name') }}</th>
+                                            <th>{{ __('sentence.Email') }}</th>
+                                            <th>{{ __('sentence.Roles') }}</th>
+                                            <th>{{ __('sentence.Actions') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -89,23 +89,23 @@
                                                 <td>
                                                     <a href="{{ route('users.edit',$user->id) }}"
                                                        class="btn btn-sm btn-info">
-                                                        Edit
+                                                        {{ __('sentence.Edit') }}
                                                     </a>
                                                     @if($user->hasRole('user'))
                                                         <form action="{{ route('users.destroy', $user->id) }}"
-                                                              method="post" onsubmit="return confirm('Are your sure?');"
+                                                              method="post" onsubmit="return confirm('{{ __('sentence.delete_confirm') }}');"
                                                               style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger">
-                                                                Delete
+                                                                {{ __('sentence.Delete') }}
                                                             </button>
                                                         </form>
                                                     @endif
                                                 </td>
                                             </tr>
                                         @empty
-                                            <h4 class="header-title">No users</h4>
+                                            <h4 class="header-title">{{ __('sentence.no_users') }}</h4>
                                         @endforelse
                                         </tbody>
                                     </table>
@@ -113,8 +113,45 @@
                                 </div> <!-- end table-responsive-->
                             </div> <!-- end preview-->
                         </div> <!-- end tab-content-->
+                        <br>
+                        <h4 class="header-title">{{ __('sentence.TrashـUsers') }}</h4>
+                        <table class="table table-centered mb-0">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>{{ __('sentence.Name') }}</th>
+                                <th>{{ __('sentence.Email') }}</th>
+                                <th>{{ __('sentence.Roles') }}</th>
+                                <th>{{ __('sentence.Actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; ?>
+                            @forelse($trash as $key => $user)
+                                    <?php $i++; ?>
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames() as $v)
+                                                <label class="badge badge-primary-lighten"
+                                                       style="font-size: 14px">{{ $v }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('users.restore', $user->id) }}" class="btn btn-sm btn-success">Restore</a>
 
+                                    </td>
+                                </tr>
+                            @empty
+                                <h4 class="header-title">{{ __('sentence.no_users') }}</h4>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        {{ $trash->links() }}
                     </div> <!-- end card body-->
+
                 </div> <!-- end card -->
             </div><!-- end col-->
         </div>

@@ -11,7 +11,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Edit user info</h4>
+                                <h4 class="header-title">{{ __('sentence.Edit_user_info') }}</h4>
                                 <br>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="input-sizes-preview">
@@ -19,7 +19,7 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Name</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Name') }}</label>
                                                 <input type="text" name="name" value="{{ $user->name ? : old('name') }}"
                                                        id="example-input-normal" class="form-control"
                                                        placeholder="Name">
@@ -29,7 +29,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Email</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Email') }}</label>
                                                 <input type="text" name="email" value="{{ old('email', $user->email) }}"
                                                        id="example-input-normal" class="form-control"
                                                        placeholder="Email">
@@ -39,22 +39,21 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Password</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.password') }}</label>
                                                 <input type="password" name="password" id="example-input-normal"
                                                        class="form-control"
                                                        placeholder="Password">
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Confirm
-                                                    Password</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.password_confirm') }}</label>
                                                 <input type="password" name="confirm-password" id="example-input-normal"
                                                        class="form-control" placeholder="Normal">
                                             </div>
 
                                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
-                                                    <strong>Role:</strong>
+                                                    <strong>{{ __('sentence.Roles') }}</strong>
                                                     {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
                                                 </div>
                                             </div>
@@ -65,9 +64,7 @@
                                             </div>
                                         </form>
                                     </div> <!-- end preview-->
-
                                 </div> <!-- end tab-content-->
-
                             </div> <!-- end card-body -->
                         </div> <!-- end card -->
                     </div> <!-- end col -->

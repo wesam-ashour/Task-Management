@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditClientRequest extends FormRequest
+class StoreTags extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,17 +19,15 @@ class EditClientRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
-            'company_en' => ['required','max:255'],
-            'company_ar' => ['required','max:255'],
-            'vat_en' => ['required','max:255'],
-            'vat_ar' => ['required','max:255'],
-            'address_en' => ['required','max:255'],
-            'address_ar' => ['required','max:255'],
+            'name_en' => ['required','max:255'],
+            'name_ar' => ['required','max:255'],
+            'description_en' => ['required'],
+            'description_ar' => ['required'],
         ];
     }
 }

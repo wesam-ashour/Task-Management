@@ -11,14 +11,14 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Create new role</h4>
+                                <h4 class="header-title">{{ __('sentence.Create_new_role') }}</h4>
                                 <br>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="input-sizes-preview">
                                         <form action="{{ route('roles.store') }}" method="POST">
                                             @csrf
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Name Role</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Role_Name') }}</label>
                                                 <input type="text" name="name"
                                                        id="example-input-normal" class="form-control"
                                                        placeholder="Name">
@@ -28,7 +28,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Permission</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Permissions') }}</label>
                                                 <br/>
                                                 @foreach($permission as $value)
                                                     <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
@@ -42,7 +42,7 @@
 
                                             <!-- /.card-body -->
                                             <div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">{{ __('sentence.submit') }}</button>
                                             </div>
                                         </form>
                                     </div> <!-- end preview-->

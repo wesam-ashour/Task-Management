@@ -10,7 +10,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="header-title">Edit role info</h4>
+                                <h4 class="header-title">{{ __('sentence.Edit_role_info') }}</h4>
                                 <br>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="input-sizes-preview">
@@ -18,7 +18,7 @@
                                             @csrf
                                             @method('PUT')
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Name role</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Role_Name') }}</label>
                                                 <input type="text" name="name" value="{{ $role->name ? : old('name') }}"
                                                        id="example-input-normal" class="form-control"
                                                        placeholder="Name">
@@ -28,7 +28,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="example-input-normal" class="form-label">Email</label>
+                                                <label for="example-input-normal" class="form-label">{{ __('sentence.Permissions') }}</label>
                                                 <br/>
                                                 @foreach($permission as $value)
                                                     <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
@@ -42,7 +42,7 @@
                                             <br>
                                             <!-- /.card-body -->
                                             <div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">{{ __('sentence.submit') }}</button>
                                             </div>
                                         </form>
                                     </div> <!-- end preview-->

@@ -4,7 +4,8 @@
     <!-- LOGO -->
     <a href="index.html" class="logo text-center logo-light">
                     <span class="logo-lg" style="font-size: 17px;">
-                        <img src="{{asset('assets/images/logo.png')}}" alt="" height="35"> Tasks Management
+                        <img src="{{asset('assets/images/logo.png')}}" alt="" height="35">
+                        {{ __('sentence.Tasks_Management') }}
                     </span>
         <span class="logo-sm">
                         <img src="{{asset('assets/images/logo.png')}}" alt="" height="20">
@@ -22,13 +23,6 @@
                 <a href="{{route('dashboard')}}" class="side-nav-link active">
                     <i class="uil-home-alt"></i>
                     <span> {{ __('sentence.dashboard') }} </span>
-                </a>
-            </li>
-
-            <li class="side-nav-item">
-                <a href="/" class="side-nav-link">
-                    <i class="uil-bell"></i>
-                    <span> {{ __('sentence.notifications') }} </span>
                 </a>
             </li>
 

@@ -24,9 +24,12 @@ class CreateClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'company' => ['required','max:255'],
-            'vat' => ['required','max:255'],
-            'address' => ['required','max:255'],
+            'company_en' => ['required','max:255'],
+            'company_ar' => ['required','max:255'],
+            'vat_en' => ['required','max:255'],
+            'vat_ar' => ['required','max:255'],
+            'address_en' => ['required','max:255'],
+            'address_ar' => ['required','max:255'],
         ];
     }
 }

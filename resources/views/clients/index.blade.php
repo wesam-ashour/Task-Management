@@ -28,9 +28,10 @@
                 @include('sweetalert::alert')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Table Users</h4>
+                        <h4 class="header-title">{{ __('sentence.List_Clients') }}</h4>
+                        <br>
                         <div class="content-header">
-                            <a href="{{ route(('clients.create')) }}" class="btn btn-primary">Add new client</a>
+                            <a href="{{ route(('clients.create')) }}" class="btn btn-primary">{{ __('sentence.Add_new_client') }}</a>
                         </div>
                         <br>
                         <div class="tab-content">
@@ -40,7 +41,6 @@
                                 </div> <!-- end table-responsive-->
                             </div> <!-- end preview-->
                         </div> <!-- end tab-content-->
-
                     </div> <!-- end card body-->
                 </div> <!-- end card -->
             </div><!-- end col-->

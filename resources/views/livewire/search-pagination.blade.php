@@ -14,10 +14,10 @@
                 <table class="table table-centered mb-0">
                     <thead class="table-dark">
                     <tr>
-                        <th>Company Name</th>
-                        <th>Vat</th>
-                        <th>Address</th>
-                        <th>Actions</th>
+                        <th>{{ __('sentence.Name_Client') }}</th>
+                        <th>{{ __('sentence.Vat_Client') }}</th>
+                        <th>{{ __('sentence.Address_Client') }}</th>
+                        <th>{{ __('sentence.Actions') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,16 +31,16 @@
                                 @if($user->id == '1')
                                     @can('client-edit')
                                         <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-sm btn-info">
-                                            Edit
+                                            {{ __('sentence.Edit') }}
                                         </a>
                                     @endcan
                                     @can('client-delete')
                                         <form action="{{ route('clients.destroy', $client->id) }}" method="POST"
-                                              onsubmit="return confirm('Are your sure?');"
+                                              onsubmit="return confirm('{{ __('sentence.Addـnewـuser') }}');"
                                               style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                            <input type="submit" class="btn btn-sm btn-danger" value="{{ __('sentence.Delete') }}">
                                         </form>
                                     @endcan
                                 @else

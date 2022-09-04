@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <br>
                 <div class="mb-3">
-                    <label for="example-input-normal" class="form-label">Name Role</label>
+                    <label for="example-input-normal" class="form-label">{{ __('sentence.Role_Name') }}</label>
                     <input type="text" name="name" value=" {{ $role->name }}" disabled
                            id="example-input-normal" class="form-control">
                 </div>
@@ -14,7 +14,7 @@
                 <div class="mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <label for="example-input-normal" class="form-label">Permissions</label>
+                            <label for="example-input-normal" class="form-label">{{ __('sentence.Permissions') }}</label>
 
                             @if(!empty($rolePermissions))
                                 @foreach($rolePermissions as $v)

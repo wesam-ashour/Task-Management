@@ -89,7 +89,6 @@
                                 </div> <!-- end card-->
                             </div> <!-- end col-->
                         </div> <!-- end row -->
-
                     </div> <!-- end col -->
 
                     <div class="col-xl-7">
@@ -121,19 +120,17 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <button name="status" type="submit" class="btn btn-sm btn-info"
-                                                        value="closed">Complete Task
+                                                        value="closed"> {{ __('sentence.complete_task') }}
                                                 </button>
                                                 <input name="title" type="hidden" class="btn btn-sm btn-info"
                                                        value="{{$list->title}}">
                                             </form>
                                             </p>
                                         @empty
-                                            no tasks
+                                            {{ __('sentence.no_tasks') }}
                                         @endforelse
-
                                     </div>
                                 </div> <!-- end .todoapp-->
-
                             </div> <!-- end card-body -->
                         </div> <!-- end card-->
 

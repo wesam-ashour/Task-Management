@@ -54,8 +54,16 @@ class ProjectsController extends Controller
 
     public function store(CreateProjectRequest $request)
     {
-        $project = Project::create($request->validated());
-        $user = User::find($request->user_id);
+//        $project = Project::create($request->validated());
+        $validate = $request->validated();
+        $Project = new Project();
+        $Project->title = ['en' => $request->title_en, 'ar' => $request->title_ar];
+        $Project->description = ['en' => $request->description_en, 'ar' => $request->description_ar];
+        $Project->deadline = $request->deadline;
+        $Project->status = $request->status;
+        $Project->user_id = $request->user_id;
+        $Project->client_id = $request->client_id;
+        $Project->save();
 
         return redirect()->route('projects.index')->with('success-create','The project added successfully');
     }
@@ -83,7 +91,17 @@ class ProjectsController extends Controller
 
     public function update(EditProjectRequest $request, Project $project)
     {
-        $project->update($request->validated());
+//        $project->update($request->validated());
+
+        $Project = Project::findOrFail($project->id);
+        $Project->update([
+            $Project->title = ['en' => $request->title_en, 'ar' => $request->title_ar],
+            $Project->description = ['en' => $request->description_en, 'ar' => $request->description_ar],
+            $Project->deadline = $request->deadline,
+            $Project->status = $request->status,
+            $Project->user_id = $request->user_id,
+            $Project->client_id = $request->client_id
+        ]);
 
         return redirect()->route('projects.index')->with('success-edit','The project updated successfully');
     }
