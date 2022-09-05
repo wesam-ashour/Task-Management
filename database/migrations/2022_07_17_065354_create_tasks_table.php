@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained();
             $table->date('deadline');
             $table->string('status')->default('open');
+            $table->longText('TaskCode');
             $table->softDeletes();
             $table->timestamps();
         });

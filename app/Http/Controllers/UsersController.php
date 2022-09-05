@@ -27,14 +27,14 @@ class UsersController extends Controller
 //                ->orWhere('email', 'LIKE', "%{$search}%")
 //                ->get();
             $data = User::search($request->search)->paginate(5);
-            $trash = User::onlyTrashed()->get();
+            $trash = User::onlyTrashed()->paginate(5);
 
             if (!count($data)) {
                 Alert::error('No search found', 'There is not users found!');
             }
 
         } else {
-            $data = User::whereHas("roles", function($q){ $q->where("name", "user"); })->orderBy('id', 'asc')->paginate(3, ['*'], 'users');
+            $data = User::whereHas("roles", function($q){ $q->where("name",'!=', "Admin"); })->orderBy('id', 'asc')->paginate(3, ['*'], 'users');
             $trash = User::onlyTrashed()->paginate(3, ['*'], 'trashed');
         }
         return view('users.index', compact('data', 'trash', 'notifications', 'user'));
@@ -54,6 +54,7 @@ class UsersController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
+        $user->markEmailAsVerified();
         $user->assignRole($request->input('roles'));
         return redirect()->route('users.index')->with('success-create','The user added successfully');
     }

@@ -141,6 +141,18 @@
                                                         <div class="alert alert-danger">{{ $message }}</div>
                                                         @enderror
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label for="example-input-normal" class="form-label">
+                                                            {{ __('sentence.Title') }}
+                                                        </label><span
+                                                            style="color: red"> ({{ __('sentence.english') }})</span>
+                                                        <textarea type="text" name="TaskCode"
+                                                               id="example-input-normal" class="form-control"
+                                                                  placeholder="Task Code"></textarea>
+                                                        @error('TaskCode')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
                                                 </div> <!-- end col -->
 
                                                 <div>

@@ -9,9 +9,10 @@ use Spatie\Translatable\HasTranslations;
 
 class Project extends Model
 {
-    use HasFactory,SoftDeletes,HasTranslations;
-    public $translatable = ['title','description'];
+    use HasFactory, SoftDeletes, HasTranslations;
 
+    public const STATUS = ['open', 'in_progress', 'blocked', 'cancelled', 'completed'];
+    public $translatable = ['title', 'description'];
     protected $fillable = [
         'title',
         'description',
@@ -21,7 +22,16 @@ class Project extends Model
         'status'
     ];
 
-    public const STATUS  = ['open', 'in_progress', 'blocked', 'cancelled', 'completed'];
+    public function GetUserAttribute()
+    {
+        $profile_ids = null;
+        $profiles = $this->user()->get('name');
+        foreach ($profiles as $profile) {
+            $profile_ids = $profile->name;
+        }
+
+        return $profile_ids;
+    }
 
     public function user()
     {

@@ -16,10 +16,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-         \App\Models\User::factory()->create([
-             'name' => 'Wesam',
-             'email' => 'wesam@gmail.com',
-             'password' => bcrypt("password")
-         ]);
+//         \App\Models\User::factory()->create([
+//             'name' => 'Wesam',
+//             'email' => 'wesam@gmail.com',
+//             'password' => bcrypt("password")
+//         ]);
+        $this->call(PermissionTableSeeder::class);
+        $this->call(CreateAdminUserSeeder::class);
+
     }
 }

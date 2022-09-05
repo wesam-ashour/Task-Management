@@ -126,6 +126,7 @@
                                                 <th>{{ __('sentence.Title') }}</th>
                                                 <th>{{ __('sentence.Description') }}</th>
                                                 <th>{{ __('sentence.deadline') }}</th>
+                                                <th>{{ __('sentence.Assigned to') }}</th>
                                                 <th>{{ __('sentence.Status') }}
                                                 </th>
                                                 <th>{{ __('sentence.Actions') }}</th>
@@ -138,6 +139,7 @@
                                                     <td>{{ $project->title }}</td>
                                                     <td>{{ $project->description }}</td>
                                                     <td>{{ $project->deadline }}</td>
+                                                    <td>{{ $project->user }}</td>
                                                     <td>{{trans('sentence.'.$project->status)}}</td>
                                                     <td>
                                                         @if($user->id == '1')

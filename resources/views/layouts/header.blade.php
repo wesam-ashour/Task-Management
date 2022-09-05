@@ -13,48 +13,51 @@
                 </form>
             </div>
         </li>
-        <li class="dropdown notification-list topbar-dropdown" >
-                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-haspopup="false" aria-expanded="false">
-                            <img src="{{asset('assets/images/flags/language.png')}}" alt="user-image" class="uil uil-arrow-growth" height="25">
-                            <span class="align-middle d-none d-sm-inline-block">
+        <li class="dropdown notification-list topbar-dropdown">
+            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <img src="{{asset('assets/images/flags/language.png')}}" alt="user-image" class="uil uil-arrow-growth"
+                     height="25">
+                <span class="align-middle d-none d-sm-inline-block">
                                 @if(LaravelLocalization::getCurrentLocale() == 'ar')
-                                    العربية
-                                @else
-                                English
-                                @endif
+                        العربية
+                    @else
+                        English
+                    @endif
                             </span> <i
-                                class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu">
-                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            <!-- item-->
-                            <a hreflang="{{ $localeCode }}"
-                               href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
-                               class="dropdown-item notify-item">
-                                {{ $properties['native'] }}
-                            </a>
-                            @endforeach
-                        </div>
+                    class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <!-- item-->
+                    <a hreflang="{{ $localeCode }}"
+                       href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                       class="dropdown-item notify-item">
+                        {{ $properties['native'] }}
+                    </a>
+                @endforeach
+            </div>
 
-{{--            <ul>--}}
-{{--                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
-{{--                    <li>--}}
-{{--                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"--}}
-{{--                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
-{{--                            {{ $properties['native'] }}--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endforeach--}}
-{{--            </ul>--}}
+            {{--            <ul>--}}
+            {{--                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)--}}
+            {{--                    <li>--}}
+            {{--                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"--}}
+            {{--                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">--}}
+            {{--                            {{ $properties['native'] }}--}}
+            {{--                        </a>--}}
+            {{--                    </li>--}}
+            {{--                @endforeach--}}
+            {{--            </ul>--}}
         </li>
 
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
+                @if($user->hasRole('Admin'))
                 @if($notifications->count() >= 1 )
                     <span class="noti-icon-badge"></span>
+                @endif
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg">
@@ -72,12 +75,13 @@
 
                 <div>
                     <!-- item-->
+                    @if($user->hasRole('Admin'))
                     @forelse($notifications as $notification)
                         <a href="" class="dropdown-item notify-item">
                             <div class="notify-icon bg-primary">
                                 <i class="mdi mdi-comment-account-outline"></i>
                             </div>
-                            @if($user->hasRole('Admin'))
+
                                 <p class="notify-details">
                                     Username:
                                     [{{ $notification->data['name'] }}],<br> Email: [{{ $notification->data['email'] }}]<br>
@@ -90,7 +94,7 @@
                                     <input type="submit" class="btn btn-sm btn-info" value="Mark as read">
                                 </form>
                                 </p>
-                            @else
+
                                 {{--                                <p class="notify-details">--}}
                                 {{--                                    Username:--}}
                                 {{--                                    [{{ $notification->data['title'] }}]--}}
@@ -103,11 +107,12 @@
                                 {{--                                    <input type="submit" class="btn btn-sm btn-info" value="Mark as read">--}}
                                 {{--                                </form>--}}
                                 {{--                                </p>--}}
-                            @endif
+
                         </a>
                     @empty
                         <p>There are no new notifications</p>
                     @endforelse
+                    @endif
                     <a href="#" class="dropdown-item text-center text-primary notify-item notify-all">
                         View all
                     </a>
@@ -158,7 +163,26 @@
                 <span>
                                         <span class="account-user-name">{{$user->name}}</span>
 
-                                        <span class="account-position">{{$user->roles->pluck('name') [0] ?? ''}}</span>
+{{--                                    <span class="account-position">{{$user->roles->pluck('name') [0] ?? ''}}</span>--}}
+                                        <span class="account-position">
+                                            @if(LaravelLocalization::getCurrentLocale() == 'ar')
+                                                @if($user->hasRole('Admin'))
+                                                    مسؤول
+                                                @elseif($user->hasRole('User'))
+                                                    مستخدم
+                                                @else
+                                                    {{$user->roles->pluck('name') [0] ?? ''}}
+                                                @endif
+                                            @elseif(LaravelLocalization::getCurrentLocale() == 'en')
+                                                @if($user->hasRole('Admin'))
+                                                    Admin
+                                                @elseif($user->hasRole('User'))
+                                                    User
+                                                @else
+                                                    {{$user->roles->pluck('name') [0] ?? ''}}
+                                                @endif
+                                            @endif
+                                        </span>
                                     </span>
             </a>
             <div

@@ -114,6 +114,7 @@
                             </div> <!-- end preview-->
                         </div> <!-- end tab-content-->
                         <br>
+                        @if(count($trash))
                         <h4 class="header-title">{{ __('sentence.TrashـUsers') }}</h4>
                         <table class="table table-centered mb-0">
                             <thead class="table-dark">
@@ -150,6 +151,7 @@
                             </tbody>
                         </table>
                         {{ $trash->links() }}
+                        @endif
                     </div> <!-- end card body-->
 
                 </div> <!-- end card -->

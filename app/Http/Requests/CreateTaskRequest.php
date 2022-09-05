@@ -33,6 +33,7 @@ class CreateTaskRequest extends FormRequest
             'project_id' => ['required', 'exists:projects,id'],
             'client_id' => ['required', 'exists:clients,id'],
             'status' => ['required'],
+            'TaskCode' => ['required'],
         ];
     }
 }
